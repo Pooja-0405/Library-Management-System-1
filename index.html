@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library Management Dashboard</title>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="sidebar">
+    <h2>📚 My Library</h2>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#books">Manage Books</a>
+    <a href="#students">Students</a>
+    <a href="#issues">Issue Books</a>
+    <a href="#reports">Reports</a>
+</div>
+
+<div class="main" id="dashboard">
+    <h1>Library Dashboard</h1>
+    <p>Welcome to Library Management System</p>
+
+    <div class="cards">
+        <div class="card">
+            <h3>Total Books</h3>
+            <h2 id="totalBooks">0</h2>
+        </div>
+        <div class="card">
+            <h3>Total Students</h3>
+            <h2 id="totalStudents">0</h2>
+        </div>
+        <div class="card">
+            <h3>Issued Books</h3>
+            <h2 id="issuedBooks">0</h2>
+        </div>
+    </div>
+
+    <section id="books">
+        <h2>Book Management</h2>
+
+        <input id="title" placeholder="Book Title">
+        <input id="author" placeholder="Author">
+        <input id="category" placeholder="Category">
+        <input id="quantity" type="number"
+        min="0" placeholder="Quantity">
+
+        <button onclick="addBook()">Add Book</button>
+
+        <input id="search" placeholder="Search books..."
+        oninput="displayBooks()">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody id="bookList"></tbody>
+        </table>
+    </section>
+<section id="students">
+    <h2>Student Management</h2>
+
+    <input id="studentName"
+           placeholder="Student Name">
+
+    <input id="rollNo"
+           placeholder="Roll Number">
+
+    <button onclick="addStudent()">
+        Register Student
+    </button>
+
+    <h3>Registered Students</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Roll Number</th>
+            </tr>
+        </thead>
+
+        <tbody id="studentList"></tbody>
+    </table>
+</section>
+<section id="issues">
+    <h2>Issue & Return Books</h2>
+
+    <h3>Issue a Book</h3>
+
+    <select id="issueBookSelect">
+        <option value="">Select Book</option>
+    </select>
+
+    <select id="issueStudentSelect">
+        <option value="">Select Student</option>
+    </select>
+
+    <label>Due Date:</label>
+    <input type="date" id="dueDate">
+
+    <button onclick="issueBook()">
+        Issue Book
+    </button>
+
+    <h3>Issued Books Records</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Book</th>
+                <th>Student</th>
+                <th>Roll Number</th>
+                <th>Issue Date</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody id="issueList"></tbody>
+    </table>
+</section>
+    <section id="reports">
+    <h2>Library Analytics</h2>
+
+    <div style="width: 100%; max-width: 700px; height: 350px; margin: 20px auto;">
+        <canvas id="libraryChart"></canvas>
+    </div>
+</section>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}">
+</script>
+
+</body>
+</html>
